@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вхід / Реєстрація</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .auth-container {
+      background-color: #ffffff;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      padding-left: 40px;
+      padding-right: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #1c1e21;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #dddfe2;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #1877f2;
+      box-shadow: 0 0 0 2px #e7f3ff;
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-style: none;
+      border-radius: 6px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition-property: background-color;
+      transition-duration: 0.2s;
+      box-sizing: border-box;
+    }
+
+    .btn-primary {
+      background-color: #000000;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary:hover {
+      background-color: #333333;
+    }
+
+    .btn-secondary {
+      background-color: #000000;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #333333;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .message.error {
+      color: red;
+    }
+
+    .message.success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+<div class="auth-container">
+  <div id="login-form-container">
+    <h2>Вхід в обліковий запис</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <input type="text" id="loginUsername" placeholder="Логін" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="loginPassword" placeholder="пароль" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Вхід</button>
+    </form>
+    <button id="showRegisterBtn" class="btn btn-secondary">Реєстрація</button>
+    <p id="loginMessage" class="message"></p>
+  </div>
+
+  <div id="register-form-container" style="display: none;">
+    <h2>Створити обліковий запис</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <input type="text" id="registerUsername" placeholder="Логін" required>
+      </div>
+      <div class="form-group">
+        <input type="text" id="registerFullName" placeholder="Повне ім'я" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="registerPassword" placeholder="Пароль" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="registerConfirmPassword" placeholder="Підтвердження паролю" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Зареєструватись</button>
+    </form>
+    <button id="showLoginBtn" class="btn btn-secondary">Вже маєте акаунт?</button>
+    <p id="registerMessage" class="message"></p>
+  </div>
+</div>
+
+<script src="LoginANDregistration.js"></script>
+</body>
+</html>

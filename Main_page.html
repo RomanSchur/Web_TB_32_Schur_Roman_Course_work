@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стрічка Новин</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .page-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #ddd;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        #searchInput {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 12px;
+            padding-right: 12px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            min-width: 200px;
+        }
+        #searchButton {
+            background-color: transparent;
+            border-style: none;
+            padding-left: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #555;
+            vertical-align: middle;
+        }
+        #searchButton:hover {
+            color: #000;
+        }
+        #categoryFilter {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 12px;
+            padding-right: 30px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            min-width: 200px;
+            background-color: white;
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px 10px;
+            cursor: pointer;
+        }
+        .news-content-area {  }
+        .news-list-column {  }
+        .news-item {
+            background-color: #ffffff;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .news-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        .news-item h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 1.4em;
+            color: #333;
+        }
+        .news-author {
+            font-size: 0.9em;
+            color: #777;
+            margin-left: 5px;
+        }
+        .user-info {
+            text-align: right;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .user-greeting { margin-right: 15px; }
+        .user-info button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        #logoutButton { background-color: #dc3545; color: white; }
+        #logoutButton:hover { background-color: #c82333; }
+        .admin-button { background-color: #007bff; color: white; }
+        .admin-button:hover { background-color: #0056b3; }
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto;
+            background-color: rgba(0,0,0,0.5); padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe; margin: 5% auto; padding: 25px;
+            border: 1px solid #888; width: 80%; max-width: 600px;
+            border-radius: 8px; position: relative;
+        }
+        .close-button {
+            color: #aaa; float: right; font-size: 28px;
+            font-weight: bold; line-height: 1; cursor: pointer;
+            background: none; border: none; padding: 0;
+        }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+        #addNewsForm .form-group { margin-bottom: 15px; text-align: left; }
+        #addNewsForm label { display: block; margin-bottom: 5px; font-weight: bold; }
+        #addNewsForm input[type="text"],
+        #addNewsForm input[type="url"],
+        #addNewsForm input[type="file"],
+        #addNewsForm textarea,
+        #addNewsForm select {
+            width: 100%; padding: 10px; border: 1px solid #ccc;
+            border-radius: 4px; box-sizing: border-box; font-size: 1em;
+        }
+        #addNewsForm input[type="file"] { padding: 8px; margin-top: 5px; }
+        #addNewsForm textarea { resize: vertical; }
+        .btn-submit-news {
+            background-color: #28a745; color: white; padding: 10px 15px;
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 1em; width: 100%;
+        }
+        .btn-submit-news:hover { background-color: #218838; }
+        .message { margin-top: 15px; font-size: 14px; text-align: center; }
+        .message.error { color: red; }
+        .message.success { color: green; }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <header class="page-header">
+        <div class="search-container">
+            <input type="search" id="searchInput" placeholder="Пошук...">
+            <button id="searchButton" class="search-button-symbol" title="Пошук">🔍</button>
+        </div>
+        <div class="category-container">
+            <select id="categoryFilter">
+                <option value="">Всі категорії</option>
+            </select>
+        </div>
+    </header>
+    <main class="news-content-area">
+        <div class="news-list-column" id="newsList">
+        </div>
+    </main>
+    <div class="user-info" id="userInfo">
+    </div>
+</div>
+
+<div id="addNewsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeAddNewsModal">×</span>
+        <h2>Додати нову новину</h2>
+        <form id="addNewsForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="newsTitleForm">Заголовок:</label>
+                <input type="text" id="newsTitleForm" name="newsTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="newsContentForm">Зміст:</label>
+                <textarea id="newsContentForm" name="newsContent" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="newsCategory">Категорія:</label>
+                <select id="newsCategory" name="newsCategory" required>
+                    <option value="" disabled selected>Оберіть категорію...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="newsImageUpload">Фото новини (необов'язково):</label>
+                <input type="file" id="newsImageUpload" name="newsImage" accept="image/png, image/jpeg, image/gif">
+            </div>
+            <button type="submit" class="btn-submit-news">Додати новину</button>
+            <p id="addNewsFormMessage" class="message"></p>
+        </form>
+    </div>
+</div>
+
+<script src="Main_page.js"></script>
+</body>
+</html>

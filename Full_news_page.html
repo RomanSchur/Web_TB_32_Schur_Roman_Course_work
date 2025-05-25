@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Повна новина</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .page-container {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px 15px;
+      background-color: #ffffff;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .news-header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .news-header h1 {
+      font-size: 2.2em;
+      color: #222;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .close-button-container {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+    }
+    .close-button {
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    }
+    .close-button:hover {
+      color: #333;
+    }
+    .news-body-layout {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+    .full-text-column {
+      flex: 2;
+      font-size: 1.1em;
+      text-align: justify;
+    }
+    .full-text-column p {
+      margin-top: 0;
+      margin-bottom: 1em;
+    }
+    .photo-news-column {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .photo-news-column img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+    .news-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .author-info, .date-info {
+      background-color: #e9ecef;
+      padding: 5px 12px;
+      border-radius: 15px;
+    }
+    .loading-message, .error-message {
+      text-align: center;
+      font-size: 1.2em;
+      padding: 20px;
+      color: #777;
+    }
+    .error-message {
+      color: red;
+    }
+    .action-buttons-container {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .delete-button {
+      padding: 10px 25px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .delete-button:hover {
+      background-color: #c82333;
+    }
+    .back-button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-button {
+      padding: 10px 25px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .back-button:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+<div class="page-container">
+  <div id="fullNewsContainer">
+    <p class="loading-message">Завантаження повної новини...</p>
+  </div>
+  <div class="action-buttons-container" id="ButtonsContainer">
+  </div>
+</div>
+<div class="back-button-container">
+  <button class="back-button" id="backToMainPage">Повернутися до списку новин</button>
+</div>
+<script src="Full_news_page.js"></script>
+</body>
+</html>
